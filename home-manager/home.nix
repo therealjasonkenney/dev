@@ -1,14 +1,12 @@
 { config, pkgs, ...}:
 
-let
-  nixvim = import (builtins.fetchGit {
-    url = "https://github.com/nix-community/nixvim";
-    rev = "9a24838aac6b55a865dd30f1b5885ac4f62c78e1";
-  });
-in {
+{
+
+  home.stateVersion = "23.11";
 
   imports = [
-    nixvim.homeManagerModules.nixvim
+    ./alacritty.nix
+    ./starship.nix
   ];
 
   # Git
@@ -24,7 +22,6 @@ in {
   programs.skim.enable = true;
 
   # Shell 
-  programs.alacritty.enable = true;
   programs.fish.enable = true;
   programs.fish.functions.lk = "rg --files $argv | sk --preview=\"bat {} --color always\"";
 
@@ -41,6 +38,7 @@ in {
   # Multi-plexer
   programs.zellij.enable = true;
   programs.zellij.settings.default_shell = "fish";
+  home.file.".config/zellij/layouts/default.kdl".source = ../zellij/default_layout.kdl;
 
   programs.home-manager.enable = true;
 }

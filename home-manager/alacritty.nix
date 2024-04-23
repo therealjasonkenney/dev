@@ -5,7 +5,6 @@
 
   programs.alacritty.settings = {
     font.size = 32.0;
-    shell = "fish";
     window.option_as_alt = "Both";
     window.startup_mode = "Fullscreen";
     selection.save_to_clipboard = true;

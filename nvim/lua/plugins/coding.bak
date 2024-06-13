@@ -1,0 +1,54 @@
+local cmp = require("cmp")
+
+local function cmp_map_i(fallback)
+  if cmp.visible() and cmp.get_active_entry() then
+    cmp.confirm({
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = false,
+    })
+  else
+    fallback()
+  end
+end
+
+local function should_enable_cmp()
+  local function isComment()
+    local context = require("cmp.config.context")
+
+    return context.in_treesitter_capture("comment")
+  end
+
+  local function isPromptBuf()
+    local buftype = vim.api.nvim_get_option_value("buftype", { buf = 0 })
+
+    return buftype == "prompt"
+  end
+
+  local function isMacro()
+    local is_recording = vim.fn.reg_recording ~= ""
+    local is_executing = vim.fn.reg_executing ~= ""
+
+    return is_recording or is_executing
+  end
+
+  local disabled = isPromptBuf() or isMacro() or isComment()
+
+  return not disabled
+end
+
+return {
+  {
+    "hrsh7th/nvim-cmp",
+    opts = {
+      enabled = should_enable_cmp,
+
+      mapping = {
+        ["<CR>"] = cmp.mapping({
+          i = cmp_map_i,
+          s = cmp.mapping.confirm({ select = true }),
+          c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+        }),
+      },
+    },
+  },
+}

@@ -1,0 +1,28 @@
+cask_args appdir: "~/Applications", require_sha: true
+
+cask "alacritty"
+cask "firefox"
+cask "font-hack"
+
+# Tools
+brew "bat"
+brew "fd"
+brew "fish"
+brew "git"
+brew "neovim"
+brew "ripgrep"
+brew "sk"
+brew "starship"
+brew "zellij"
+
+# LSP related stuff
+brew "biome"
+brew "fsouza/prettierd/prettierd"
+brew "sass/sass/sass"
+
+# ASDF Dependencies
+brew "coreutils"
+
+# Ruby dependencies
+brew "gmp"
+brew "libyaml"

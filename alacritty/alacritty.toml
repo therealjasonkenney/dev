@@ -1,0 +1,13 @@
+[font]
+size = 32.0
+
+[font.normal]
+family = "Hack"
+style = "Regular"
+
+[selection]
+save_to_clipboard = true
+
+[window]
+option_as_alt = "Both"
+startup_mode = "Fullscreen"
